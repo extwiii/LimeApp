@@ -64,6 +64,10 @@ EXPO_PUBLIC_MAPBOX_KEY=pk.ey123...
 
 -------------------- Second Commit --------------------
 
+10 - Add `cluster` prop to the ShapeLayer, render `CircleLayer` for clusters, Render the count of scooters in a cluster using `SymbolLayer`, Hide Scooter Icons when in cluster `filter={['!', ['has', 'point_count']]}`
+
+-------------------- Third Commit --------------------
+
 ## Credit
 
 [Building an e-Scooter App with React Native and Mapbox](https://www.youtube.com/watch?v=uxj8jnlooP8)
