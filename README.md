@@ -60,6 +60,10 @@ EXPO_PUBLIC_MAPBOX_KEY=pk.ey123...
 
 -------------------- First Commit --------------------
 
+9 - Create a json file with lat and long of scooters and update Map component to render scooter icons on the map with those lat and long
+
+-------------------- Second Commit --------------------
+
 ## Credit
 
 [Building an e-Scooter App with React Native and Mapbox](https://www.youtube.com/watch?v=uxj8jnlooP8)
