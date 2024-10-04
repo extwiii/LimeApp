@@ -80,6 +80,18 @@ EXPO_PUBLIC_MAPBOX_KEY=pk.ey123...
 
 -------------------- Fifth Commit --------------------
 
+15 - Install `https://gorhom.dev/react-native-bottom-sheet/` for bottom sheets
+
+```
+yarn add @gorhom/bottom-sheet@^5 react-native-reanimated react-native-gesture-handler
+```
+
+16 - Update plugin section of `babel.config.js`
+
+```
+const plugins = ['react-native-reanimated/plugin'];
+```
+
 ## Credit
 
 [Building an e-Scooter App with React Native and Mapbox](https://www.youtube.com/watch?v=uxj8jnlooP8)

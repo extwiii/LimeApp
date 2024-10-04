@@ -1,3 +1,5 @@
+import getDistance from '@turf/distance';
+import { point } from '@turf/helpers';
 import * as Location from 'expo-location';
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
 
@@ -8,6 +10,28 @@ const ScooterContext = createContext<any>({});
 export default function ScooterProvider({ children }: PropsWithChildren) {
   const [selectedScooter, setSelectedScooter] = useState<any>();
   const [direction, setDirection] = useState<any>();
+  const [isNearby, setIsNearby] = useState(false);
+
+  useEffect(() => {
+    let subscription: Location.LocationSubscription | undefined;
+    const watchLocation = async () => {
+      subscription = await Location.watchPositionAsync({ distanceInterval: 10 }, (newLocation) => {
+        const from = point([newLocation.coords.longitude, newLocation.coords.latitude]);
+        const to = point([selectedScooter.long, selectedScooter.lat]);
+        const distance = getDistance(from, to, { units: 'meters' });
+        if (distance < 1000) {
+          setIsNearby(true);
+        }
+      });
+    };
+    if (selectedScooter) {
+      watchLocation();
+    }
+    // unsubscribe
+    return () => {
+      subscription?.remove();
+    };
+  }, [selectedScooter]);
 
   useEffect(() => {
     const fetchDirections = async () => {
@@ -21,6 +45,7 @@ export default function ScooterProvider({ children }: PropsWithChildren) {
 
     if (selectedScooter) {
       fetchDirections();
+      setIsNearby(false);
     }
   }, [selectedScooter]);
 
@@ -31,8 +56,9 @@ export default function ScooterProvider({ children }: PropsWithChildren) {
         setSelectedScooter,
         direction,
         directionCoordinates: direction?.routes?.[0]?.geometry?.coordinates,
-        routeTime: direction?.routes?.[0]?.duration,
-        routeDistance: direction?.routes?.[0]?.distance,
+        duration: direction?.routes?.[0]?.duration,
+        distance: direction?.routes?.[0]?.distance,
+        isNearby,
       }}>
       {children}
     </ScooterContext.Provider>
