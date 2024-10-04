@@ -74,6 +74,12 @@ EXPO_PUBLIC_MAPBOX_KEY=pk.ey123...
 
 -------------------- Forth Commit --------------------
 
+13 - Refactor: Create ScooterProvider to move business logic to provider to reuse that later on
+
+14 - Refactor: Create LineRoute and ScooterMarkers to simplfy Map component
+
+-------------------- Fifth Commit --------------------
+
 ## Credit
 
 [Building an e-Scooter App with React Native and Mapbox](https://www.youtube.com/watch?v=uxj8jnlooP8)
