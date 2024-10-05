@@ -186,6 +186,10 @@ const { error, data } = await supabase.rpc('nearby_scooters', {
 
 -------------------- Ninth Commit --------------------
 
+32 - Show/hide markers based on active ride status
+
+-------------------- Tenth Commit --------------------
+
 ## Credit
 
 [Building an e-Scooter App with React Native and Mapbox](https://www.youtube.com/watch?v=uxj8jnlooP8)

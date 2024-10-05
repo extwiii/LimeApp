@@ -10,7 +10,7 @@ import { useRide } from '~/providers/RideProvider';
 import { useScooter } from '~/providers/ScooterProvider';
 
 export default function SelectedScooterSheet() {
-  const { selectedScooter, duration, distance, isNearby } = useScooter();
+  const { selectedScooter, duration, distance, isNearby, setSelectedScooter } = useScooter();
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   const { startRide } = useRide();
@@ -18,6 +18,8 @@ export default function SelectedScooterSheet() {
   useEffect(() => {
     if (selectedScooter) {
       bottomSheetRef.current?.expand();
+    } else {
+      bottomSheetRef.current?.close();
     }
   }, [selectedScooter]);
 
@@ -26,6 +28,7 @@ export default function SelectedScooterSheet() {
       ref={bottomSheetRef}
       snapPoints={[200]}
       enablePanDownToClose
+      onClose={() => setSelectedScooter(undefined)}
       backgroundStyle={{ backgroundColor: '#414442' }}>
       {selectedScooter && (
         <BottomSheetView style={{ flex: 1, padding: 10, gap: 20 }}>
@@ -69,7 +72,10 @@ export default function SelectedScooterSheet() {
           <View>
             <Button
               title="Start journey"
-              onPress={() => startRide(selectedScooter.id)}
+              onPress={() => {
+                startRide(selectedScooter.id);
+                setSelectedScooter(undefined);
+              }}
               disabled={!isNearby}
             />
           </View>
