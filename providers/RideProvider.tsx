@@ -1,14 +1,18 @@
+import * as Location from 'expo-location';
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 
 import { useAuth } from './AuthProvider';
 
 import { supabase } from '~/lib/supabase';
+import { fetchDirectionBasedOnCoords } from '~/services/directions';
 
 const RideContext = createContext<any>({});
 
 export default function RideProvider({ children }: PropsWithChildren) {
   const [ride, setRide] = useState<any>();
+  const [rideRoute, setRideRoute] = useState<any>([]);
+
   const { userId } = useAuth();
 
   useEffect(() => {
@@ -26,6 +30,26 @@ export default function RideProvider({ children }: PropsWithChildren) {
     };
     fetchActiveRide();
   }, []);
+
+  useEffect(() => {
+    let subscription: Location.LocationSubscription | undefined;
+    const watchLocation = async () => {
+      subscription = await Location.watchPositionAsync({ distanceInterval: 30 }, (newLocation) => {
+        console.log('New location: ', newLocation.coords.longitude, newLocation.coords.latitude);
+        setRideRoute((currrRoute: any) => [
+          ...currrRoute,
+          [newLocation.coords.longitude, newLocation.coords.latitude],
+        ]);
+      });
+    };
+    if (ride) {
+      watchLocation();
+    }
+    // unsubscribe
+    return () => {
+      subscription?.remove();
+    };
+  }, [ride]);
 
   const startRide = async (scooterId: number) => {
     if (ride) {
@@ -53,9 +77,21 @@ export default function RideProvider({ children }: PropsWithChildren) {
     if (!ride) {
       return;
     }
+
+    const actualRoute = await fetchDirectionBasedOnCoords(rideRoute);
+    const rideRouteCoords = actualRoute.matchings[0].geometry.coordinates;
+    const rideRouteDuration = actualRoute.matchings[0].duration;
+    const rideRouteDistance = actualRoute.matchings[0].distance;
+    setRideRoute(rideRouteCoords);
+
     const { error } = await supabase
       .from('rides')
-      .update({ finished_at: new Date() })
+      .update({
+        finished_at: new Date(),
+        routeDuration: rideRouteDuration,
+        routeDistance: rideRouteDistance,
+        routeCoords: rideRouteCoords,
+      })
       .eq('id', ride.id);
     if (error) {
       Alert.alert('Failed to finish the ride');
@@ -65,7 +101,9 @@ export default function RideProvider({ children }: PropsWithChildren) {
   };
 
   return (
-    <RideContext.Provider value={{ startRide, finishRide, ride }}>{children}</RideContext.Provider>
+    <RideContext.Provider value={{ startRide, finishRide, ride, rideRoute }}>
+      {children}
+    </RideContext.Provider>
   );
 }
 

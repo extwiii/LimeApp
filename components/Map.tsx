@@ -10,7 +10,7 @@ Mapbox.setAccessToken(process.env.EXPO_PUBLIC_MAPBOX_KEY || '');
 
 export default function Map() {
   const { directionCoordinates } = useScooter();
-  const { ride } = useRide();
+  const { ride, rideRoute } = useRide();
 
   const showMarkers = !ride;
 
@@ -19,10 +19,14 @@ export default function Map() {
       <Camera followZoomLevel={14} followUserLocation />
       <LocationPuck puckBearingEnabled puckBearing="heading" pulsing={{ isEnabled: true }} />
 
+      {rideRoute.length > 0 && <LineRoute id="rideRoute" coordinates={rideRoute} />}
+
       {showMarkers && (
         <>
           <ScooterMarkers />
-          {directionCoordinates && <LineRoute coordinates={directionCoordinates} />}
+          {directionCoordinates && (
+            <LineRoute id="routeToMarker" coordinates={directionCoordinates} />
+          )}
         </>
       )}
     </MapView>

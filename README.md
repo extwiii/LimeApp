@@ -190,6 +190,12 @@ const { error, data } = await supabase.rpc('nearby_scooters', {
 
 -------------------- Tenth Commit --------------------
 
+33 - SUPABASE: Add following column to `rides` table, `routeDuration - float8`, `routeDistance - float8` and `routeCoords - jsonb`
+
+34 - Track ride route and store it in database
+
+-------------------- Eleventh Commit --------------------
+
 ## Credit
 
 [Building an e-Scooter App with React Native and Mapbox](https://www.youtube.com/watch?v=uxj8jnlooP8)

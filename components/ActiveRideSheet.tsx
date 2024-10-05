@@ -26,7 +26,7 @@ export default function ActiveRideSheet() {
       backgroundStyle={{ backgroundColor: '#414442' }}>
       {ride && (
         <BottomSheetView style={{ flex: 1, padding: 10, gap: 20 }}>
-          <Text>Ride in progress</Text>
+          <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }}>Ride in progress</Text>
           <Button title="Finish journey" onPress={() => finishRide()} />
         </BottomSheetView>
       )}
