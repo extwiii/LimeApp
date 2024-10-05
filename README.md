@@ -92,6 +92,26 @@ yarn add @gorhom/bottom-sheet@^5 react-native-reanimated react-native-gesture-ha
 const plugins = ['react-native-reanimated/plugin'];
 ```
 
+17 - Add Start Journey button to sheet and make it disabled if scooter's distance more than 1000 mt
+
+-------------------- Sixth Commit --------------------
+
+18 - Setup Supabase project called LimeApp
+
+19 - Install supabase packages -> https://supabase.com/docs/guides/getting-started/tutorials/with-expo-react-native
+
+```
+npx expo install @supabase/supabase-js @react-native-async-storage/async-storage @rneui/themed
+```
+
+20 - Follow documents to Install and configure supabase libs in React Native
+
+21 - Follow documents to Setup Auth Provider and routers to implement authentication
+
+22 - SUPABASE: Go to Authentication/providers, select email and toggle off confirm email and save to let user signup without confirming email
+
+-------------------- Seventh Commit --------------------
+
 ## Credit
 
 [Building an e-Scooter App with React Native and Mapbox](https://www.youtube.com/watch?v=uxj8jnlooP8)
