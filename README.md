@@ -172,6 +172,20 @@ const { error, data } = await supabase.rpc('nearby_scooters', {
 
 -------------------- Eighth Commit --------------------
 
+29 - SUPABASE: Create table called `rides` and add `user_id` and `scooter_id` with their foregn keys, `finished_at` with `timestamptz` type
+
+30 - Add policies for rides table
+
+```
+- Enable insert for authenticated use (INSERT)
+- Enable read access for all users (SELECT)
+- Enable update for users based on user_id (UPDATE) - used delete policy and changed to update
+```
+
+31 - Add `RideProvider` and `ActiveRideSheet` to track rides and show different active ride bottomsheet when user start a journey
+
+-------------------- Ninth Commit --------------------
+
 ## Credit
 
 [Building an e-Scooter App with React Native and Mapbox](https://www.youtube.com/watch?v=uxj8jnlooP8)

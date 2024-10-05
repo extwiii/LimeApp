@@ -39,7 +39,8 @@ export default function ScooterProvider({ children }: PropsWithChildren) {
         const from = point([newLocation.coords.longitude, newLocation.coords.latitude]);
         const to = point([selectedScooter.long, selectedScooter.lat]);
         const distance = getDistance(from, to, { units: 'meters' });
-        if (distance < 1000) {
+        // Start Journey only active when user 300 mt close to scooter
+        if (distance < 300) {
           setIsNearby(true);
         }
       });
