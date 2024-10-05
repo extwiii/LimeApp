@@ -1,8 +1,19 @@
 # Lime App
 
-## Summary
+- React Native / Expo
+- Typescript
+- Supabase
+- Mapbox
+
+<img width="128" alt="expo-logo" src="https://github.com/user-attachments/assets/44858dd9-939c-4483-82a4-b59150bff857">
+<img width="64" alt="expo-logo" src="https://github.com/user-attachments/assets/a8122b96-9219-4812-8484-59d57237b10c">
+<img width="120" alt="expo-logo" src="https://github.com/user-attachments/assets/1165c9f9-9c51-4099-942b-bc8f3820491d">
+<img width="128" alt="expo-logo" src="https://github.com/user-attachments/assets/bbbba9a1-ce9b-4b2a-86a3-62b24da08632">
 
 ## SS
+
+<img width="1000" alt="LimeApp SS" src="https://github.com/user-attachments/assets/585375e4-af34-4850-9e73-6302011a851b">
+
 
 ## Install and Run IOS
 
